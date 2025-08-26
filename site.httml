@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Büyük Güzel Alım Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      padding: 20px;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+      color: #e74c3c;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #e67e22;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d35400;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🔥 Büyük Güzel Alım Quiz 🔥</h1>
+    <form id="quizForm">
+      <div class="question">
+        <p>1) Oyunumuzun 2'inci yaz mapında 9k rbxa karşı gelip Oyun Kurucusunu Alan kişi kimdir?</p>
+        <label><input type="radio" name="q1" value="A"> A) Haydeeee_emre</label><br>
+        <label><input type="radio" name="q1" value="B"> B) M4DARKK</label><br>
+        <label><input type="radio" name="q1" value="C"> C) Aftex</label>
+      </div>
+
+      <div class="question">
+        <p>2) Oyunumuzun eski ortaklarından olan ve bizi sattan kişi kimdir?</p>
+        <label><input type="radio" name="q2" value="A"> A) Aftex</label><br>
+        <label><input type="radio" name="q2" value="B"> B) Kayra</label><br>
+        <label><input type="radio" name="q2" value="C"> C) M4DARKK</label>
+      </div>
+
+      <div class="question">
+        <p>3) Oyunumuzun kış mevsiminde kış mapında ilk develepor tagını ve rankını alan kişi kimdir?</p>
+        <label><input type="radio" name="q3" value="A"> A) Eymen</label><br>
+        <label><input type="radio" name="q3" value="B"> B) Kayra</label><br>
+        <label><input type="radio" name="q3" value="C"> C) Mali</label>
+      </div>
+
+      <div class="question">
+        <p>4) Oyunumuzun discord grubunda oyun duyuru kanalına yazmak için hangi roller gereklidir?</p>
+        <label><input type="checkbox" name="q4" value="A"> A) Developer</label><br>
+        <label><input type="checkbox" name="q4" value="B"> B) Only Team</label><br>
+        <label><input type="checkbox" name="q4" value="C"> C) Bay</label>
+      </div>
+
+      <div class="question">
+        <p>5) Only Gidince hangi kişiler Oyunu sahib almışdır?</p>
+        <label><input type="checkbox" name="q5" value="A"> A) Batman</label><br>
+        <label><input type="checkbox" name="q5" value="B"> B) Pirlo</label><br>
+        <label><input type="checkbox" name="q5" value="C"> C) Artex</label>
+      </div>
+
+      <button type="button" onclick="checkAnswers()">Sonucu Göster</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      let score = 0;
+
+      // Doğru cevaplar
+      const correct = {
+        q1: "A",
+        q2: "C",
+        q3: "A",
+        q4: ["A","B"],
+        q5: ["A"]
+      };
+
+      const form = document.forms["quizForm"];
+
+      // q1-q3 kontrol
+      if(form["q1"].value === correct.q1) score++;
+      if(form["q2"].value === correct.q2) score++;
+      if(form["q3"].value === correct.q3) score++;
+
+      // q4 kontrol (çoklu)
+      let q4Checked = [...form.querySelectorAll('input[name="q4"]:checked')].map(e=>e.value);
+      if(JSON.stringify(q4Checked.sort()) === JSON.stringify(correct.q4.sort())) score++;
+
+      // q5 kontrol (çoklu)
+      let q5Checked = [...form.querySelectorAll('input[name="q5"]:checked')].map(e=>e.value);
+      if(JSON.stringify(q5Checked.sort()) === JSON.stringify(correct.q5.sort())) score++;
+
+      document.getElementById("result").innerText = `Toplam Puanınız: ${score}/5`; 
+    }
+  </script>
+</body>
+</html>
